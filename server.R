@@ -19,7 +19,7 @@ shinyServer(function(input, output) {
     if (input$graph_type == "histogram") {
       # Histogram
       ggplot(df_country(), aes_string(x = input$radio_continuous)) +
-        geom_histogram(bins=50) +  # histogram geom
+        geom_histogram(bins=30) +  # histogram geom
         labs (x="age", y = "Number of People", title = paste("Trend of ", input$radio_continuous)) + # labels
         facet_wrap(~prediction)    # facet by prediction
     }
