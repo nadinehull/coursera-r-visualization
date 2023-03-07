@@ -11,7 +11,7 @@ names(adult) <- tolower(names(adult))
 shinyServer(function(input, output) {
   
   df_country <- reactive({
-    adult %>% filter(native_country == input$country)
+    adult %>% filter(native_country == input$Country)
   })
   
   # TASK 5: Create logic to plot histogram or boxplot
@@ -42,11 +42,10 @@ shinyServer(function(input, output) {
       theme_minimal()    # modify theme to change text angle and legend position
     
     if (input$is_stacked) {
-      p + geom_bar(position="stacked") + fill = prediction  # add bar geom and use prediction as fill
+      p + geom_bar(aes_string(fill = "prediction"))  # add bar geom and use prediction as fill
     }
     else{
-      p + geom_bar(position="dodge") + 
-      fill = !!input$radio_categorical + # add bar geom and use input$categorical_variables as fill 
+      p + geom_bar(aes_string(fill = input$radio_categorical)) + # add bar geom and use input$categorical_variables as fill
       facet_wrap(~prediction)   # facet by prediction
     }
   })
